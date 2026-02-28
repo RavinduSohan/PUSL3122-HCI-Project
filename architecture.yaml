@@ -1,0 +1,247 @@
+# .architecture
+# LIVE PROJECT STATE — source of truth
+# Read before every stage. Update after every stage.
+# Never guess. Never recall from conversation. Only this file.
+
+stage_current: S00
+stage_completed: []
+stage_skipped: []
+
+# ─── CONVENTIONS (locked S01) ────────────────────────────────────────────────
+conventions:
+  files: ""           # camelCase utils, PascalCase models/components
+  routes: ""          # kebab-case plural
+  env_vars: ""        # SCREAMING_SNAKE_CASE
+  db_collections: ""  # camelCase plural
+  ws_events: ""       # camelCase verbNoun
+  error_shape: ""     # {message,code,status} — locked S02
+  response_shape: ""  # {data,message} or {data} — locked S02
+  branch: ""
+  commits: ""
+  ids: ""             # generated ID patterns
+
+# ─── PROJECT ─────────────────────────────────────────────────────────────────
+project:
+  name: ""
+  type: ""
+  repo: ""
+
+# ─── STACK (derived from stack.config in S01) ────────────────────────────────
+stack:
+  backend:
+    framework: ""
+    language: ""
+    port: null
+    entry: ""
+  frontend:
+    framework: ""
+    language: ""
+    port: null
+    entry: ""
+  websocket:
+    library: ""
+    port: null
+    entry: ""
+    skip: false
+  db:
+    type: ""
+    provider: ""
+    orm: ""
+    name: ""
+    connected: false
+  auth:
+    strategy: ""
+    token_storage: ""
+    roles: []
+  services:
+    storage: {provider: "", needed: false}
+    email: {provider: "", needed: false}
+    payments: {provider: "", needed: false}
+    ai: {provider: "", model: "", needed: false}
+    cache: {provider: "", needed: false}
+
+# ─── WORKSPACE ───────────────────────────────────────────────────────────────
+workspace:
+  root: ""
+  backend: ""
+  frontend: ""
+  websocket: ""
+  docs: ""
+
+# ─── ENV VARS ────────────────────────────────────────────────────────────────
+# format: VAR_NAME: {example, used_in: [], add_at: SXX}
+env_vars: {}
+
+# ─── DEPENDENCIES ────────────────────────────────────────────────────────────
+# format: package: {version, dev, add_at}
+deps:
+  backend: {}
+  frontend: {}
+  websocket: {}
+
+# ─── MODELS ──────────────────────────────────────────────────────────────────
+# fields: name:type:required:unique
+# hooks: [trigger:action]
+# methods: [name:params→return]
+# refs: [field→Model]
+models: {}
+
+# ─── AUTH ────────────────────────────────────────────────────────────────────
+auth:
+  token_field: ""
+  header: ""
+  jwt_expire: ""
+  utils:
+    file: ""
+    functions: []
+  middleware:
+    authenticate: {file: "", attaches: ""}
+    authorize: {file: "", params: ""}
+    errorHandler: {file: "", shape: ""}
+
+# ─── API ENDPOINTS ───────────────────────────────────────────────────────────
+# format per endpoint:
+#   method+path: {auth, body, response, add_at}
+# auth: none | authenticate | authenticate+authorize(role)
+# response: "STATUS:{shape}|STATUS:{shape}"
+endpoints: {}
+
+# ─── ROUTES ──────────────────────────────────────────────────────────────────
+# format: name: {file, prefix, registered_in}
+routes: {}
+
+# ─── CONTROLLERS ─────────────────────────────────────────────────────────────
+# format: name: {file, methods:[name]}
+controllers: {}
+
+# ─── MIDDLEWARE ──────────────────────────────────────────────────────────────
+middleware: {}
+
+# ─── BUSINESS LOGIC ──────────────────────────────────────────────────────────
+# format:
+#   operation: {endpoint, steps:[], modifies:[], atomic, states:[], transitions:[from→to]}
+business: {}
+
+# ─── STATUS FIELDS ───────────────────────────────────────────────────────────
+# format: Model.field: [all valid states]
+status_fields: {}
+
+# ─── WEBSOCKET ───────────────────────────────────────────────────────────────
+ws:
+  port: null
+  entry: ""
+  auth: ""
+  room_pattern: ""
+  events: {}
+  client:
+    file: ""
+    methods: []
+
+# ─── FRONTEND ────────────────────────────────────────────────────────────────
+frontend:
+  api_client:
+    file: ""
+    base_url_var: ""
+    interceptors: {request: [], response: []}
+  socket_client:
+    file: ""
+    methods: []
+  auth_store:
+    file: ""
+    state: []
+    actions: []
+    persist: ""
+  types:
+    file: ""
+    interfaces: []
+  folder_structure: []
+
+# ─── PAGES ───────────────────────────────────────────────────────────────────
+# format:
+#   /path:
+#     file, protected, api_calls:[], stores:[], ws_events:[], components:[]
+pages: {}
+
+# ─── COMPONENTS ──────────────────────────────────────────────────────────────
+# format:
+#   Name: {file, props:[name:type:required], api_calls:[], validation_schema}
+components: {}
+
+# ─── SEED ────────────────────────────────────────────────────────────────────
+seed:
+  file: ""
+  run_command: ""
+  data: {}
+  credentials: {}   # known test credentials recorded here for demo
+
+# ─── TESTS ───────────────────────────────────────────────────────────────────
+tests:
+  framework:
+    backend: ""
+    frontend: ""
+    e2e: ""
+  unit: {}
+  integration: {}
+  component: {}
+  coverage:
+    backend: {target: 70, actual: 0}
+    frontend: {target: 60, actual: 0}
+  commands:
+    backend: ""
+    frontend: ""
+    coverage: ""
+
+# ─── CICD ────────────────────────────────────────────────────────────────────
+cicd:
+  file: ""
+  jobs: []
+  triggers: []
+  secrets: []
+  deploy:
+    frontend_url: ""
+    backend_url: ""
+  status: ""
+
+# ─── SECURITY ────────────────────────────────────────────────────────────────
+security:
+  rate_limit: {}
+  cors_origins: []
+  helmet: false
+  input_validation: false
+  audit_passed: false
+
+# ─── PERFORMANCE ─────────────────────────────────────────────────────────────
+performance:
+  indexes: []
+  pagination: false
+  n_plus_one_checked: false
+
+# ─── VERIFY LOG ──────────────────────────────────────────────────────────────
+# Record verify results per stage. Failed checks recorded until fixed.
+verify_log: {}
+  # S01: {passed: [], failed: [], resolved_at: ""}
+
+# ─── STAGE COMPLETION ────────────────────────────────────────────────────────
+# done: only true after ALL verify checks passed
+stages:
+  S01: {done: false, skipped: false, skip_reason: ""}
+  S02: {done: false, skipped: false, skip_reason: ""}
+  S03: {done: false, skipped: false, skip_reason: ""}
+  S04: {done: false, skipped: false, skip_reason: ""}
+  S05: {done: false, skipped: false, skip_reason: ""}
+  S06: {done: false, skipped: false, skip_reason: ""}
+  S07: {done: false, skipped: false, skip_reason: ""}
+  S08: {done: false, skipped: false, skip_reason: ""}
+  S09: {done: false, skipped: false, skip_reason: ""}
+  S10: {done: false, skipped: false, skip_reason: ""}
+  S11: {done: false, skipped: false, skip_reason: ""}
+  S12: {done: false, skipped: false, skip_reason: ""}
+
+# ─── SUPERSEDED ENTRIES ──────────────────────────────────────────────────────
+# Never delete old entries. Mark superseded here.
+superseded: []
+  # - {entry: "endpoints.Movie.getAll.path: /api/movie", superseded_by: "/api/movies", at: S05}
+
+# ─── SKIPPED ITEMS ───────────────────────────────────────────────────────────
+skipped: []
+  # - {item: "payment gateway", reason: "out of scope", deferred_to: S12}

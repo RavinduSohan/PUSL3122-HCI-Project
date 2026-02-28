@@ -1,0 +1,163 @@
+# stack.config
+# Fill this from requirement before S01. Lock after S01.
+# AI reads this once in S01 and derives: SDKs, env vars, connection patterns, folder structure.
+# Never improvise a service connection. Everything comes from here.
+
+# ─── PROJECT ─────────────────────────────────────────────────────────────────
+project:
+  name: ""
+  description: ""
+  type: ""                    # web-app | api-only | fullstack | mobile-backend
+
+# ─── LANGUAGE + RUNTIME ──────────────────────────────────────────────────────
+language:
+  backend: typescript         # typescript | javascript
+  frontend: typescript        # typescript | javascript
+  node_version: "20"
+
+# ─── BACKEND ─────────────────────────────────────────────────────────────────
+backend:
+  framework: express          # express | fastify | nestjs | hono
+  port: 4000
+  api_prefix: /api
+
+# ─── FRONTEND ────────────────────────────────────────────────────────────────
+frontend:
+  framework: nextjs           # nextjs | react | vue | nuxt | sveltekit
+  port: 3000
+  css: tailwind               # tailwind | css-modules | styled-components | none
+  router: app                 # app | pages (nextjs) | react-router | vue-router
+  state: zustand              # zustand | pinia | redux | jotai | none
+  forms: react-hook-form      # react-hook-form | formik | vee-validate | none
+  validation: zod             # zod | yup | valibot | none
+
+# ─── DATABASE ────────────────────────────────────────────────────────────────
+database:
+  type: mongodb               # mongodb | postgresql | mysql | sqlite | supabase
+  provider: atlas             # local | atlas | supabase | planetscale | neon | railway | turso
+  orm: mongoose               # mongoose | prisma | drizzle | typeorm | none
+  name: ""
+  connection_var: MONGODB_URI # env var name for connection string
+
+# ─── AUTH ────────────────────────────────────────────────────────────────────
+auth:
+  strategy: jwt               # jwt | session | clerk | auth0 | supabase-auth | nextauth
+  token_storage: localStorage # localStorage | httpOnly-cookie | memory
+  jwt_expire: 7d
+  password_hash: bcryptjs     # bcryptjs | argon2 | none (if external auth)
+  roles: [user, admin]        # list all roles
+
+# ─── REALTIME ────────────────────────────────────────────────────────────────
+realtime:
+  needed: false               # true | false
+  library: socket.io          # socket.io | ws | pusher | supabase-realtime | ably
+  port: 4001                  # if separate server
+
+# ─── FILE STORAGE ────────────────────────────────────────────────────────────
+storage:
+  needed: false               # true | false
+  provider: none              # s3 | cloudinary | supabase-storage | uploadthing | none
+  bucket: ""
+
+# ─── EMAIL ───────────────────────────────────────────────────────────────────
+email:
+  needed: false               # true | false
+  provider: none              # resend | sendgrid | nodemailer | none
+  from: ""
+
+# ─── PAYMENTS ────────────────────────────────────────────────────────────────
+payments:
+  needed: false               # true | false
+  provider: none              # stripe | lemonsqueezy | paddle | none
+  mode: ""                    # live | test
+
+# ─── AI / LLM ────────────────────────────────────────────────────────────────
+ai:
+  needed: false               # true | false
+  provider: none              # anthropic | openai | google | none
+  model: ""                   # claude-sonnet-4-6 | gpt-4o | gemini-pro | etc
+  streaming: false
+
+# ─── CACHE ───────────────────────────────────────────────────────────────────
+cache:
+  needed: false               # true | false
+  provider: none              # redis | upstash | memory | none
+
+# ─── HOSTING + DEPLOY ────────────────────────────────────────────────────────
+deploy:
+  frontend: none              # vercel | netlify | cloudflare-pages | none
+  backend: none               # railway | render | fly | heroku | aws | none
+  websocket: none             # same as backend | separate | none
+  ci_cd: github-actions       # github-actions | gitlab-ci | none
+
+# ─── TESTING ─────────────────────────────────────────────────────────────────
+testing:
+  backend: jest               # jest | vitest | mocha
+  frontend: jest              # jest | vitest
+  e2e: none                   # playwright | cypress | none
+  db_mock: mongodb-memory-server  # mongodb-memory-server | @prisma/test | none
+
+# ─── KNOWN PACKAGE VERSIONS ──────────────────────────────────────────────────
+# Pin versions here to avoid compatibility issues.
+# AI derives exact install commands from this.
+versions:
+  # backend
+  express: "4"
+  mongoose: "8"
+  socket.io: "4"
+  jsonwebtoken: "9"
+  bcryptjs: "2"
+  zod: "3"
+  # frontend
+  next: "15"
+  react: "19"
+  zustand: "5"
+  axios: "1"
+  react-hook-form: "7"
+  # testing
+  jest: "29"
+  supertest: "7"
+  # infra
+  typescript: "5"
+
+# ─── ENV VAR PATTERNS ────────────────────────────────────────────────────────
+# AI generates .env.example files from this.
+# service: which service needs this var
+# These get copied into .architecture.env_vars in S01.
+env_patterns:
+  backend:
+    - NODE_ENV
+    - PORT
+    - DB_URI_VAR           # use value from database.connection_var
+    - JWT_SECRET
+    - JWT_EXPIRE
+    - CORS_ORIGIN
+  frontend:
+    - NEXT_PUBLIC_API_URL
+    - NEXT_PUBLIC_WS_URL   # only if realtime.needed
+  websocket:               # only if realtime.needed
+    - WS_PORT
+    - API_URL
+    - JWT_SECRET
+  # add service-specific vars below as needed:
+  # storage: [CLOUDINARY_URL] or [S3_BUCKET, AWS_ACCESS_KEY, AWS_SECRET_KEY]
+  # email: [RESEND_API_KEY] or [SENDGRID_API_KEY]
+  # payments: [STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY]
+  # ai: [ANTHROPIC_API_KEY] or [OPENAI_API_KEY]
+  # cache: [REDIS_URL] or [UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN]
+
+# ─── SECRETS (go into CI/CD secrets, never .env.example values) ──────────────
+secrets:
+  - JWT_SECRET
+  # add all keys, tokens, passwords here
+
+# ─── CONNECTION PATTERNS ─────────────────────────────────────────────────────
+# AI uses these to write the exact connection code.
+# Do not change after S01.
+connection_notes:
+  database: ""    # e.g. "use mongoose.connect, handle disconnect on SIGINT"
+  storage: ""     # e.g. "use cloudinary v2 SDK, upload_stream for files"
+  email: ""       # e.g. "use resend SDK, send from verified domain"
+  payments: ""    # e.g. "use stripe SDK, webhook signature verification required"
+  ai: ""          # e.g. "use anthropic SDK, stream responses"
+  cache: ""       # e.g. "use ioredis, handle connection errors gracefully"
