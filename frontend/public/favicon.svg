@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Room floor -->
+  <rect x="2" y="18" width="28" height="12" rx="2" fill="#6366f1"/>
+  <!-- Sofa back -->
+  <rect x="5" y="13" width="22" height="7" rx="3" fill="#4f46e5"/>
+  <!-- Sofa left arm -->
+  <rect x="3" y="16" width="5" height="6" rx="2" fill="#4338ca"/>
+  <!-- Sofa right arm -->
+  <rect x="24" y="16" width="5" height="6" rx="2" fill="#4338ca"/>
+  <!-- Sofa seat cushion highlight -->
+  <rect x="8" y="18" width="7" height="4" rx="1.5" fill="#818cf8"/>
+  <rect x="17" y="18" width="7" height="4" rx="1.5" fill="#818cf8"/>
+  <!-- Room walls hint (top-left corner lines) -->
+  <path d="M2 18 L2 4 L30 4" stroke="#c7d2fe" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
