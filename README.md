@@ -2,9 +2,6 @@
 
 Furniture Room Visualisation System for PUSL3122 (HCI, Computer Graphics and Visualisation).
 
-FurniView is the actual system delivered by Group 56: a full-stack web app where staff and customers design rooms in 2D, inspect them in 3D, and manage saved designs through a portfolio workflow.
-
-Deadline: 19 March 2026, 16:00 SL time.
 
 ---
 
@@ -31,12 +28,12 @@ Fill final names before submission.
 
 | Name | Role | Area |
 |---|---|---|
-| Member 1 | Team Lead | Planning, integration |
-| Member 2 | Backend | API, auth, models |
-| Member 3 | Frontend | Dashboard, auth UI |
-| Member 4 | Graphics | Canvas2D, Scene3D |
-| Member 5 | QA | Tests, CI/CD |
-| Member 6 | UX | Wireframes, evaluation docs |
+| Karandana Dananjaya 10953546 | Team Lead | Planning, integration, Graphics |
+| Harindu Aluthge 10953477| Backend | API,  models |
+| Nethusara Mervin 10953504 | Frontend | auth UI |
+| Bhawanthi Weerakoon 10952640 | Backend | auth|
+| Liyanage Kulathilake 10953740 | QA | Tests, CI/CD |
+| Edirippullige Fernando 10953740 | UX | Wireframes, evaluation docs |
 
 ---
 
