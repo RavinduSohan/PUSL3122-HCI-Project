@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+:root {
+  /* ── Surface hierarchy ─────────────────────────────────────────────── */
+  --bg-page:      #F1F5F9;
+  --bg-surface:   #FFFFFF;
+  --bg-inset:     #F8F9FB;
+  --bg-nav:       #0F0F0F;
+
+  /* ── Dark surface scale (used in editor panels, modals) ─────────────── */
+  --surface-0: #0A0F1C;
+  --surface-1: #111827;
+  --surface-2: #1E293B;
+  --surface-3: #293548;
+
+  /* ── Typography ────────────────────────────────────────────────────── */
+  --text-primary: #0F172A;
+  --text-muted:   #64748B;
+
+  /* ── Border ─────────────────────────────────────────────────────────── */
+  --border:       #E4E7ED;
+
+  /* ── Accent ─────────────────────────────────────────────────────────── */
+  --accent:       #6366F1;
+  --accent-hover: #4F46E5;
+  --accent-warm:  #F59E0B;
+
+  /* ── Semantic state colours ──────────────────────────────────────────── */
+  --state-success: #10B981;
+  --state-warning: #F59E0B;
+  --state-danger:  #EF4444;
+  --state-info:    #3B82F6;
+
+  /* ── Dark Studio palette (Blender / 3ds-Max inspired) ──────────────── */
+  --studio-bg:     #0F0F0F;
+  --studio-panel:  #1A1A1A;
+  --studio-panel2: #222222;
+  --studio-border: rgba(200,155,60,0.20);
+  --studio-gold:   #C89B3C;
+  --studio-gold-lt:#DFB962;
+  --studio-text:   #F5F5F5;
+  --studio-muted:  #B0B0B0;
+  --studio-subtle: #2A2A2A;
+
+  /* keep forest/emerald aliases so other pages still compile */
+  --emerald:       #C89B3C;
+  --emerald-light: #DFB962;
+  --emerald-dim:   rgba(200,155,60,0.08);
+  --forest-page-light: #0F0F0F;
+  --forest-surface:#1A1A1A;
+  --forest-card:   #1A1A1A;
+  --forest-card-2: #222222;
+  --forest-border: rgba(200,155,60,0.20);
+  --sage:          #F5F5F5;
+  --sage-muted:    #B0B0B0;
+  /* gold aliases */
+  --gold:          #C89B3C;
+  --gold-light:    #DFB962;
+  --gold-dim:      rgba(200,155,60,0.08);
+  --dark-bg:       #0F0F0F;
+  --dark-surface:  #1A1A1A;
+  --dark-card:     #1A1A1A;
+  --dark-card-2:   #222222;
+  --dark-border:   rgba(200,155,60,0.20);
+  --cream:         #F5F5F5;
+  --cream-muted:   #B0B0B0;
+
+  /* ── Shadow scale (3 levels only) ───────────────────────────────────── */
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow-md:    0 4px 12px rgba(0,0,0,0.10), 0 12px 32px rgba(0,0,0,0.08);
+  --shadow-lg:    0 8px 24px rgba(0,0,0,0.14), 0 24px 48px rgba(0,0,0,0.10);
+
+  /* legacy aliases */
+  --shadow-card:  var(--shadow-sm);
+  --shadow-hover: var(--shadow-md);
+
+  /* ── Border-radius scale ─────────────────────────────────────────────── */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+}
+
+body {
+  color: var(--text-primary);
+  background: var(--bg-page);
+  /* Subtle paper noise — eliminates "flat HTML" look */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0;
+}
+
+/* ── Display font utility ───────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display, 'Georgia', serif); }
+
+/* ── Premium card (raised surface) ─────────────────────────────────────── */
+.card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.18s ease, transform 0.18s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ── Premium dark gold card ───────────────────────────────────────────── */
+.card-premium {
+  background: #1A1A1A;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(200,155,60,0.18);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.50), 0 1px 0 rgba(200,155,60,0.06);
+  transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
+}
+.card-premium:hover {
+  box-shadow: 0 8px 36px rgba(0,0,0,0.70), 0 0 24px rgba(200,155,60,0.14);
+  border-color: rgba(200,155,60,0.45);
+  transform: translateY(-3px);
+}
+
+/* ── Button press micro-interaction ────────────────────────────────────── */
+button:active, a:active { transform: scale(0.97); }
+
+/* ── Input focus ring ───────────────────────────────────────────────────── */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+/* ── Page-entry animations ──────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-up   { animation: fadeUp   500ms ease-out both; }
+.animate-fade-in   { animation: fadeIn   400ms ease-out both; }
+.animate-slide-right { animation: slideInRight 350ms ease-out both; }
+
+/* Stagger helpers */
+.stagger-1 { animation-delay:  80ms; }
+.stagger-2 { animation-delay: 160ms; }
+.stagger-3 { animation-delay: 240ms; }
+.stagger-4 { animation-delay: 320ms; }
+.stagger-5 { animation-delay: 400ms; }
+.stagger-6 { animation-delay: 480ms; }
+
+/* ── Canvas cursor styles ───────────────────────────────────────────────── */
+canvas { cursor: crosshair; }
+canvas.grab { cursor: grab; }
+canvas.grabbing { cursor: grabbing; }
+
+/* ── Print styles ───────────────────────────────────────────────────────── */
+@media print {
+  body { background: white !important; }
+  .print\:hidden { display: none !important; }
+  canvas {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+  @page { margin: 1.5cm; }
+}
+
