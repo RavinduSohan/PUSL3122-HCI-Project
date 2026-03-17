@@ -28,7 +28,7 @@ Fill final names before submission.
 
 | Name | Role | Area |
 |---|---|---|
-| Karandana Dananjaya 10953546 | Team Lead | Planning, integration, Graphics |
+| Karandana Dananjaya 10953546 | Team Lead | Planning, integration, Graphics 2d & 3d |
 | Harindu Aluthge 10953477| Backend | API,  models |
 | Nethusara Mervin 10953504 | Frontend | auth UI |
 | Bhawanthi Weerakoon 10952640 | Backend | auth|
